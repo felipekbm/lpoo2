@@ -18,6 +18,15 @@ public class Selecao {
     private String logo;
 
     private List<Jogador> jogadores = new ArrayList<Jogador>();
+    private Treinador treinador = null;
+
+    public Treinador getTreinador() {
+        return treinador;
+    }
+
+    public void setTreinador(Treinador treinador) {
+        this.treinador = treinador;
+    }
 
     public Selecao(Integer id, String nome, String logo) {
         this.id = id;
