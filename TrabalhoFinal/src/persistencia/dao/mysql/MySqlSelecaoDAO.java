@@ -91,6 +91,26 @@ public class MySqlSelecaoDAO implements ISelecaoDAO {
 
         return true;
     }
+    
+    @Override
+    public Selecao buscaPorJogador(int id) {
+        Selecao item = null;
+
+        try {
+            PreparedStatement st = conn.prepareStatement("select * FROM posicao WHERE ID = ?;");
+            st.setInt(1, id);
+            ResultSet rs = (st.executeQuery());
+               
+            if (rs != null && rs.next()) {
+                item = new Selecao(rs.getInt("id"), rs.getString("nome"), rs.getString("logo"));
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        return item;
+    }
 
     @Override
     public Selecao busca(int id) {

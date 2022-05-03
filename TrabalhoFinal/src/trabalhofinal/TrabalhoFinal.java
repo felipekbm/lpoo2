@@ -6,10 +6,7 @@ package trabalhofinal;
 
 import java.sql.Connection;
 import jdbc.conexao.ConexaoDAO;
-import models.Posicao;
-import persistencia.dao.mysql.MySqlJuizDAO;
-import persistencia.dao.mysql.MySqlParticipanteDAO;
-import persistencia.dao.mysql.MySqlPosicaoDAO;
+import telas.ListaParticipantes;
 
 /**
  *
@@ -24,16 +21,11 @@ public class TrabalhoFinal {
         ConexaoDAO conexaoDAO = new ConexaoDAO();
         Connection conn= conexaoDAO.conectaDB();
       
-         MySqlParticipanteDAO daoParticipante = new  MySqlParticipanteDAO(conn);
-         
-             MySqlJuizDAO daoJuiz = new  MySqlJuizDAO(conn);
-
-       System.out.println(daoParticipante.listaTodos().get(1).getNome()) ;
+       
+      
        
        
-       // MySqlPosicaoDAO  mysqlPosicaoDAO = new MySqlPosicaoDAO(conn);
-       /* mysqlPosicaoDAO.novo(new Posicao(0, "ATACANTE"));*/
-       //System.out.println(mysqlPosicaoDAO.busca(1).getNome()) ;
+        ListaParticipantes tela = new ListaParticipantes(conn);
         
     }
     

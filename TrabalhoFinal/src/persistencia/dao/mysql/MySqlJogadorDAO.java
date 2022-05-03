@@ -90,10 +90,8 @@ public class MySqlJogadorDAO implements IJogadorDAO {
         Jogador item = null;
 
         try {
-            PreparedStatement st = conn.prepareStatement(" \n"
-                    + " select participante.id, participante.nome, participante.foto, participante.nacionalidade, jogador.camisa \n"
-                    + " from participante inner join \n"
-                    + " jogador on participante.id = jogador.id where id = ?;");
+            PreparedStatement st = conn.prepareStatement("select participante.id, participante.nome, participante.nacionalidade, participante.data_nasc, participante.foto, jogador.camisa, posicao.id as posicao_id \n"
+                    + "from participante inner join jogador on participante.id = jogador.id inner join posicao on jogador.posicao_id = posicao.id ; where id = ?;");
             st.setInt(1, id);
             ResultSet rs = (st.executeQuery());
 
@@ -118,9 +116,8 @@ public class MySqlJogadorDAO implements IJogadorDAO {
         try {
             Statement st = conn.createStatement();
 
-            ResultSet rs = (st.executeQuery(" select participante.id, participante.nome, participante.foto, participante.nacionalidade, jogador.camisa \n"
-                    + " from participante inner join \n"
-                    + " jogador on participante.id = jogador.id;"));
+            ResultSet rs = (st.executeQuery(" select participante.id, participante.nome, participante.nacionalidade, participante.data_nasc, participante.foto, jogador.camisa, posicao.id as posicao_id \n"
+                    + "from participante inner join jogador on participante.id = jogador.id inner join posicao on jogador.posicao_id = posicao.id ;"));
 
             while (rs != null && rs.next()) {
                 item = new Jogador(rs.getInt("id"), rs.getString("nacionalidade"), rs.getDate("data_nasc"), rs.getString("nome"),
@@ -154,7 +151,7 @@ public class MySqlJogadorDAO implements IJogadorDAO {
     }
 
     @Override
-    public Jogador buscaPosicao(Jogador vo) {
+    public Jogador buscaSelecao(Jogador vo) {
         Jogador item = null;
         Selecao selecao = null;
         try {
@@ -171,7 +168,7 @@ public class MySqlJogadorDAO implements IJogadorDAO {
     }
 
     @Override
-    public Jogador buscaSelecao(Jogador vo) {
+    public Jogador buscaPosicao(Jogador vo) {
         Jogador item = null;
         Posicao posicao = null;
         try {
