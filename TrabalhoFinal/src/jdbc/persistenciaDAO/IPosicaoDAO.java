@@ -4,6 +4,7 @@
  */
 package jdbc.persistenciaDAO;
 
+import models.Jogador;
 import models.Posicao;
 
 /**
@@ -12,6 +13,6 @@ import models.Posicao;
  */
 public interface IPosicaoDAO extends IDAO<Posicao> {
     
-    
+       public Jogador buscaPorJogador(Jogador vo);
     
 }

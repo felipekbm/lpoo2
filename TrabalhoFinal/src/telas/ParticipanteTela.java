@@ -12,23 +12,26 @@ import java.awt.Image;
 import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
+import models.Juiz;
+import models.Treinador;
 
 /**
  *
  * @author User
  */
 public class ParticipanteTela extends javax.swing.JFrame {
-    
-    
+
     Jogador jogador = null;
+    Treinador treinador = null;
+    Juiz juiz = null;
 
     public ParticipanteTela(Jogador jogador) {
-
+        this.jogador = jogador;
         try {
             URL url = new URL(jogador.getFoto());
             Image image = ImageIO.read(url).getScaledInstance(388, 300, Image.SCALE_DEFAULT);;
             JLabel imgLabel = new JLabel(new ImageIcon(image));
-            
+
             imgLabel.setSize(388, 300);
             this.setSize(5000, 5000);
             setResizable(false);
@@ -40,7 +43,7 @@ public class ParticipanteTela extends javax.swing.JFrame {
 
         initComponents();
         this.setVisible(true);
-        this.jogador = jogador;
+
         System.out.print(this.jogador.getFoto());
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -48,16 +51,87 @@ public class ParticipanteTela extends javax.swing.JFrame {
 
     }
 
+    public ParticipanteTela(Treinador treinador) {
+        this.treinador = treinador;
+        try {
+            URL url = new URL(treinador.getFoto());
+            Image image = ImageIO.read(url).getScaledInstance(388, 300, Image.SCALE_DEFAULT);;
+            JLabel imgLabel = new JLabel(new ImageIcon(image));
+
+            imgLabel.setSize(388, 300);
+            this.setSize(5000, 5000);
+            setResizable(false);
+            this.add(imgLabel).setLocation(30, 50);
+
+        } catch (Exception ex) {
+
+        }
+
+        initComponents();
+        this.setVisible(true);
+
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        exibeTreinador();
+
+    }
+
+    public ParticipanteTela(Juiz juiz) {
+        this.juiz = juiz;
+        try {
+            URL url = new URL(juiz.getFoto());
+            Image image = ImageIO.read(url).getScaledInstance(388, 300, Image.SCALE_DEFAULT);;
+            JLabel imgLabel = new JLabel(new ImageIcon(image));
+
+            imgLabel.setSize(388, 300);
+            this.setSize(5000, 5000);
+            setResizable(false);
+            this.add(imgLabel).setLocation(30, 50);
+
+        } catch (Exception ex) {
+
+        }
+
+        initComponents();
+        this.setVisible(true);
+
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+        exibeJuiz();
+
+    }
+
+    void exibeJuiz() {
+
+        jTextField1.setText("Nome: " + this.juiz.getNome());
+        jTextField2.setText("Nacionalidade: " + this.juiz.getNacionalidade());
+        jTextField3.setText("Data Nascimento: " + juiz.getData_nasc().toString());
+
+        jTextField6.setVisible(false);
+        jTextField4.setVisible(false);
+        jTextField5.setVisible(false);
+    }
+
+    void exibeTreinador() {
+
+        jTextField1.setText("Nome: " + this.treinador.getNome());
+        jTextField2.setText("Nacionalidade: " + this.treinador.getNacionalidade());
+        jTextField3.setText("Selecao: " + this.treinador.getSelecao().getNome());
+        jTextField6.setText("Data Nascimento: " + treinador.getData_nasc().toString());
+        ;
+
+        jTextField4.setVisible(false);
+        jTextField5.setVisible(false);
+    }
+
     void exibeJogador() {
-            
-        
-        
+
         jTextField1.setText("Nome: " + this.jogador.getNome());
-        jTextField2.setText("Posicao: " + this.jogador.getPosicao());
+        jTextField2.setText("Posicao: " + this.jogador.getPosicao().getNome());
         jTextField3.setText("Camisa: " + this.jogador.getCamisa());
         jTextField6.setText("Nacionalidade: " + this.jogador.getNacionalidade());
         jTextField4.setText("Selecao: " + this.jogador.getSelecao().getNome());
-        jTextField5.setText("Data Nascimento: "+jogador.getData_nasc().toString() );
+        jTextField5.setText("Data Nascimento: " + jogador.getData_nasc().toString());
     }
 
     /**

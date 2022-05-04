@@ -40,6 +40,7 @@ public class ListaParticipantes extends javax.swing.JFrame {
         this.tableJogos();
         this.tableJuizes();
         this.tableTreinadores();
+
     }
 
     public void tableJogadores() {
@@ -52,9 +53,9 @@ public class ListaParticipantes extends javax.swing.JFrame {
                 if (row >= 0) {
                     Jogador jogadorFocus = jogadores.get(row);
                     System.out.println(jogadorFocus.getNome());
-                     MySqlJogadorDAO daoJogador = new MySqlJogadorDAO(conn);
-                     jogadorFocus = daoJogador.buscaSelecao(jogadorFocus);
-                     jogadorFocus = daoJogador.buscaPosicao(jogadorFocus);
+                    MySqlJogadorDAO daoJogador = new MySqlJogadorDAO(conn);
+                    jogadorFocus = daoJogador.buscaSelecao(jogadorFocus);
+                    jogadorFocus = daoJogador.buscaPosicao(jogadorFocus);
                     new ParticipanteTela(jogadores.get(row));
                 }
             }
@@ -97,6 +98,22 @@ public class ListaParticipantes extends javax.swing.JFrame {
                 new String[]{
                     "Nome", "Nascimento", "Nacionalidade",}
         ));
+
+        contatoTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = contatoTable3.rowAtPoint(evt.getPoint());
+                int col = contatoTable3.columnAtPoint(evt.getPoint());
+                if (row >= 0) {
+                    Treinador treinadorFocus = treinadores.get(row);
+                    System.out.println(treinadorFocus.getNome());
+                    MySqlTreinadorDAO daoTreinador = new MySqlTreinadorDAO(conn);
+                    daoTreinador.buscaSelecao(treinadorFocus);
+                    new ParticipanteTela(treinadores.get(row));
+                }
+            }
+        });
+
     }
 
     public void tableSelecao() {
@@ -117,6 +134,19 @@ public class ListaParticipantes extends javax.swing.JFrame {
                     "ID", "Seleção"
                 }
         ));
+
+        contatoTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = contatoTable.rowAtPoint(evt.getPoint());
+                int col = contatoTable.columnAtPoint(evt.getPoint());
+                if (row >= 0) {
+                    System.out.printf(selecoes.get(row).getNome());
+                    new SelecaoTela(selecoes.get(row));
+                }
+            }
+        });
+
     }
 
     public void tableJogos() {
@@ -139,6 +169,19 @@ public class ListaParticipantes extends javax.swing.JFrame {
                     "Selecao A", "Selecao B", "Resultado", "Local"
                 }
         ));
+          contatoTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = contatoTable1.rowAtPoint(evt.getPoint());
+                int col = contatoTable1.columnAtPoint(evt.getPoint());
+                if (row >= 0) {
+                    
+                    new JogoTela(jogos.get(row));
+                }
+            }
+        });
+        
+
     }
 
     public void tableJuizes() {
@@ -160,6 +203,18 @@ public class ListaParticipantes extends javax.swing.JFrame {
                     "Nome", "Nascimento", "Nacionalidade"
                 }
         ));
+        contatoTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = contatoTable4.rowAtPoint(evt.getPoint());
+                int col = contatoTable4.columnAtPoint(evt.getPoint());
+                if (row >= 0) {
+                    System.out.printf(juizes.get(row).getNome());
+                    new ParticipanteTela(juizes.get(row));
+                }
+            }
+        });
+
     }
 
     /**

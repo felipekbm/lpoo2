@@ -32,7 +32,10 @@ public class MySqlTreinadorDAO implements ITreinadorDAO {
 
     @Override
     public Treinador buscaSelecao(Treinador vo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        MySqlSelecaoDAO dao = new MySqlSelecaoDAO(conn);
+        dao.buscaPorTreinador(vo);
+
+        return vo;
     }
 
     @Override

@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import models.Jogador;
 
 /**
  *
@@ -24,6 +25,28 @@ public class MySqlPosicaoDAO implements IPosicaoDAO {
 
     public MySqlPosicaoDAO(Connection conn) {
         this.conn = conn;
+    }
+    
+     @Override()
+    public Jogador buscaPorJogador(Jogador vo) {
+        Posicao item = null;
+        
+        try {
+            PreparedStatement st = conn.prepareStatement("select posicao.id, posicao.nome from posicao\n" +
+" inner join jogador \n" +
+" on posicao.id = jogador.posicao_id where jogador.id = ?;");
+            st.setInt(1, vo.getId());
+            ResultSet rs = (st.executeQuery());
+            
+            if (rs != null && rs.next()) {
+                item = new Posicao(rs.getInt("id"), rs.getString("nome"));
+                
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+     vo.setPosicao(item);
+        return vo;
     }
 
     @Override

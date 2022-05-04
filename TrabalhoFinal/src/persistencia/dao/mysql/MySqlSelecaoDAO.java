@@ -11,8 +11,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import jdbc.persistenciaDAO.ISelecaoDAO;
+import models.Jogador;
 import models.Posicao;
 import models.Selecao;
+import models.Treinador;
 
 /**
  *
@@ -50,7 +52,7 @@ public class MySqlSelecaoDAO implements ISelecaoDAO {
             Statement st = conn.createStatement();
 
             ResultSet rs = (st.executeQuery("select * from selecao where id = ?;"));
-        
+
             while (rs != null && rs.next()) {
                 item = new Selecao(rs.getInt("id"), rs.getString("nome"), rs.getString("logo"));
 
@@ -91,16 +93,18 @@ public class MySqlSelecaoDAO implements ISelecaoDAO {
 
         return true;
     }
-    
-    @Override
-    public Selecao buscaPorJogador(int id) {
+
+    @Override()
+    public Jogador buscaPorJogador(Jogador vo) {
         Selecao item = null;
 
         try {
-            PreparedStatement st = conn.prepareStatement("select * FROM posicao WHERE ID = ?;");
-            st.setInt(1, id);
+            PreparedStatement st = conn.prepareStatement("select selecao.id, selecao.logo, selecao.nome from  "
+                    + "selecao inner join jogador "
+                    + "on selecao.id = jogador.selec_id where jogador.id = ?;");
+            st.setInt(1, vo.getId());
             ResultSet rs = (st.executeQuery());
-               
+
             if (rs != null && rs.next()) {
                 item = new Selecao(rs.getInt("id"), rs.getString("nome"), rs.getString("logo"));
 
@@ -108,8 +112,30 @@ public class MySqlSelecaoDAO implements ISelecaoDAO {
         } catch (Exception e) {
             System.out.println(e);
         }
+        vo.setSelecao(item);
+        return vo;
+    }
 
-        return item;
+    @Override()
+    public Treinador buscaPorTreinador(Treinador vo) {
+        Selecao item = null;
+
+        try {
+            PreparedStatement st = conn.prepareStatement("select selecao.id, selecao.logo, selecao.nome from  "
+                    + "selecao inner join treinador "
+                    + "on selecao.id = treinador.selec_id where treinador.id = ?;");
+            st.setInt(1, vo.getId());
+            ResultSet rs = (st.executeQuery());
+
+            if (rs != null && rs.next()) {
+                item = new Selecao(rs.getInt("id"), rs.getString("nome"), rs.getString("logo"));
+
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        vo.setSelecao(item);
+        return vo;
     }
 
     @Override
@@ -120,7 +146,7 @@ public class MySqlSelecaoDAO implements ISelecaoDAO {
             PreparedStatement st = conn.prepareStatement("select * FROM posicao WHERE ID = ?;");
             st.setInt(1, id);
             ResultSet rs = (st.executeQuery());
-               
+
             if (rs != null && rs.next()) {
                 item = new Selecao(rs.getInt("id"), rs.getString("nome"), rs.getString("logo"));
 
@@ -142,7 +168,7 @@ public class MySqlSelecaoDAO implements ISelecaoDAO {
             ResultSet rs = (st.executeQuery("select * from selecao;"));
 
             while (rs != null && rs.next()) {
-                item = new Selecao(rs.getInt("id"), rs.getString("nome"),  rs.getString("logo"));
+                item = new Selecao(rs.getInt("id"), rs.getString("nome"), rs.getString("logo"));
 
                 itens.add(item);
             }
