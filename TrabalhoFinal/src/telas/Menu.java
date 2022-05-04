@@ -22,7 +22,7 @@ import persistencia.dao.mysql.MySqlTreinadorDAO;
  *
  * @author User
  */
-public class ListaParticipantes extends javax.swing.JFrame {
+public class Menu extends javax.swing.JFrame {
 
    static Connection conn = null;
     static List<Jogador> jogadores = new ArrayList<Jogador>();
@@ -31,7 +31,7 @@ public class ListaParticipantes extends javax.swing.JFrame {
     static List<Juiz> juizes = new ArrayList<Juiz>();
     static List<Treinador> treinadores = new ArrayList<Treinador>();
 
-    public ListaParticipantes(Connection conn) {
+    public Menu(Connection conn) {
         this.conn = conn;
         initComponents();
         this.setVisible(true);

@@ -6,7 +6,7 @@ package trabalhofinal;
 
 import java.sql.Connection;
 import jdbc.conexao.ConexaoDAO;
-import telas.ListaParticipantes;
+import telas.Menu;
 
 /**
  *
@@ -25,7 +25,7 @@ public class TrabalhoFinal {
       
        
        
-        ListaParticipantes tela = new ListaParticipantes(conn);
+        Menu tela = new Menu(conn);
         
     }
     

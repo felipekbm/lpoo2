@@ -31,6 +31,38 @@ public class MySqlJogoDAO implements IJogoDAO {
     }
 
     @Override
+    public Selecao listaJogosPorSelecao(Selecao vo) {
+        List<Jogo> itens = new ArrayList<Jogo>();
+        Jogo item = null;
+        try {
+            PreparedStatement st = conn.prepareStatement("select jogo.id, jogo.resultado, jogo.data, jogo.local ,\n"
+                    + " A.id as A_ID, A.NOME as A_NOME, A.LOGO  as A_LOGO,\n"
+                    + "  B.id as B_ID, B.NOME as B_NOME, B.LOGO  as B_LOGO\n"
+                    + " from jogo INNER JOIN SELECAO as A  ON  jogo.selecao_1 = A.id\n"
+                    + " inner join selecao as B on jogo.selecao_2 = b.id\n"
+                    + " \n"
+                    + "  WHERE selecao_1 = ? or selecao_2=?;");
+            st.setInt(1, vo.getId());
+            st.setInt(2, vo.getId());
+
+            st.execute();
+
+            ResultSet rs = (st.executeQuery());
+            while (rs != null && rs.next()) {
+                item = new Jogo(rs.getInt("id"), rs.getDate("data"), rs.getString("resultado"), rs.getString("local"));
+                item.setSelecao1(new Selecao(rs.getInt("A_ID"), rs.getString("A_NOME"), rs.getString("A_LOGO")));
+                item.setSelecao2(new Selecao(rs.getInt("B_ID"), rs.getString("B_NOME"), rs.getString("B_LOGO")));
+                itens.add(item);
+            }
+
+        } catch (Exception e) {
+
+        }
+        vo.setJogos(itens);
+        return vo;
+    }
+
+    @Override
     public boolean atualiza(Jogo vo) {
         try {
             PreparedStatement st = conn.prepareStatement("update jogo  selecao_1 = ?,selecao_2 = ? ,"
@@ -69,6 +101,7 @@ public class MySqlJogoDAO implements IJogoDAO {
                             rs.getString("foto")));
 
                 }
+
             } catch (Exception e) {
                 System.out.println(e);
             }
@@ -148,7 +181,8 @@ public class MySqlJogoDAO implements IJogoDAO {
         List<Jogo> itens = new ArrayList<Jogo>();
         Jogo item = null;
         try {
-            PreparedStatement st = conn.prepareStatement(" select jogo.id, jogo.resultado, jogo.data, jogo.local ,\n"
+            PreparedStatement st = conn.prepareStatement(" select jogo.id, jogo.resultado, jogo.data, "
+                    + "jogo.local ,\n"
                     + " A.id as A_ID, A.NOME as A_NOME, A.LOGO  as A_LOGO,\n"
                     + "  B.id as B_ID, B.NOME as B_NOME, B.LOGO  as B_LOGO\n"
                     + " from jogo INNER JOIN SELECAO as A  ON  jogo.selecao_1 = A.id\n"

@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import models.Jogo;
+import persistencia.dao.mysql.MySqlJuizDAO;
 
 /**
  *
@@ -67,6 +68,16 @@ public class JogoTela extends javax.swing.JFrame {
                 new SelecaoTela(jogo.getSelecao2());
             }
         });
+        
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MySqlJuizDAO DAO = new MySqlJuizDAO(Menu.conn);
+                jogo.setJuizes(DAO.buscaPorJogo(jogo));
+                new ListaEspecifica(jogo);
+            }
+        });
+        
+          jLabel1.setText(jogo.getResultado());
         this.jogo = jogo;
         initComponents();
         this.setVisible(true);
@@ -120,7 +131,7 @@ public class JogoTela extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 16)); // NOI18N
-        jLabel1.setText("2 x 1");
+        jLabel1.setText(" ");
 
         jButton2.setText("SELECAO 2");
         jButton2.addActionListener(new java.awt.event.ActionListener() {

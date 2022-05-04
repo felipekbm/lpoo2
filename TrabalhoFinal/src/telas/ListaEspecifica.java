@@ -5,12 +5,12 @@
 package telas;
 
 import java.util.ArrayList;
-import models.Jogador;
-import models.Selecao;
+import models.*;
+
 import java.util.List;
 import persistencia.dao.mysql.MySqlJogadorDAO;
-import static telas.ListaParticipantes.conn;
-import static telas.ListaParticipantes.jogadores;
+import static telas.Menu.conn;
+import static telas.Menu.jogadores;
 
 /**
  *
@@ -19,6 +19,8 @@ import static telas.ListaParticipantes.jogadores;
 public class ListaEspecifica extends javax.swing.JFrame {
 
     Selecao selecao = null;
+    List<Jogo> jogos = null;
+    Jogo jogo = null;
 
     /**
      * Creates new form ListaEspecifica
@@ -34,6 +36,97 @@ public class ListaEspecifica extends javax.swing.JFrame {
 
     }
 
+    public ListaEspecifica(Jogo jogo) {
+        initComponents();
+        this.jogo = jogo;
+        this.setVisible(true);
+        renderJuizes();
+        setResizable(false);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+         jLabel1.setText(this.jogo.getSelecao1().getNome()+ " X " + this.jogo.getSelecao2().getNome());
+         renderJuizes();
+    }
+    
+      public ListaEspecifica( List<Jogo> jogos) {
+        initComponents();
+        this.jogos = jogos;
+        this.setVisible(true);
+        
+        setResizable(false);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+         jLabel1.setText("JOGOS");
+         renderJogos();
+    }
+     public void renderJogos() {
+
+        contatoTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = contatoTable.rowAtPoint(evt.getPoint());
+                int col = contatoTable.columnAtPoint(evt.getPoint());
+                setResizable(false);
+
+                if (row >= 0) {
+                    Jogo jogoFocus = jogos.get(row);
+                   
+                   
+
+                    new JogoTela(jogoFocus);
+                }
+            }
+        });
+        
+        Object[][] jogadoresView = new Object[jogos.size()][4];
+        for (int i = 0; i < jogos.size(); i++) {
+            jogadoresView[i][0] = jogos.get(i).getSelecao1().getNome();
+            jogadoresView[i][1] = jogos.get(i).getSelecao2().getNome();
+            jogadoresView[i][2] = jogos.get(i).getResultado();
+            jogadoresView[i][3] = jogos.get(i).getLocal();
+
+        }
+        contatoTable.setModel(new javax.swing.table.DefaultTableModel(
+                jogadoresView,
+                new String[]{
+                    "Selecao A", "Selecao B", "Resultado", "Local"
+                }
+        ));
+
+    }
+    public void renderJuizes() {
+
+        contatoTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = contatoTable.rowAtPoint(evt.getPoint());
+                int col = contatoTable.columnAtPoint(evt.getPoint());
+                setResizable(false);
+
+                if (row >= 0) {
+                    Juiz juizFocus = jogo.getJuizes().get(row);
+                    System.out.println(juizFocus.getNome());
+                   
+
+                    new ParticipanteTela(juizFocus);
+                }
+            }
+        });
+        
+        Object[][] jogadoresView = new Object[jogo.getJuizes().size()][4];
+        for (int i = 0; i < jogo.getJuizes().size(); i++) {
+            jogadoresView[i][0] = jogo.getJuizes().get(i).getNome();
+            jogadoresView[i][1] = jogo.getJuizes().get(i).getData_nasc();
+            jogadoresView[i][2] = jogo.getJuizes().get(i).getNacionalidade();
+
+        }
+        contatoTable.setModel(new javax.swing.table.DefaultTableModel(
+                jogadoresView,
+                new String[]{
+                    "Nome", "Nascimento", "Nacionalidade"
+                }
+        ));
+
+    }
+
     public void renderPlayers() {
 
         contatoTable.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -42,14 +135,13 @@ public class ListaEspecifica extends javax.swing.JFrame {
                 int row = contatoTable.rowAtPoint(evt.getPoint());
                 int col = contatoTable.columnAtPoint(evt.getPoint());
                 setResizable(false);
-                
+
                 if (row >= 0) {
-                  Jogador jogadorFocus = selecao.getJogadores().get(row);
+                    Jogador jogadorFocus = selecao.getJogadores().get(row);
                     System.out.println(jogadorFocus.getNome());
                     System.out.println(jogadorFocus.getSelecao().getNome());
                     System.out.println(jogadorFocus.getPosicao().getNome());
-                    
-                    
+
                     new ParticipanteTela(jogadorFocus);
                 }
             }

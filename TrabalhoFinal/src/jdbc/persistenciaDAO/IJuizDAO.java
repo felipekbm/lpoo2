@@ -4,6 +4,7 @@
  */
 package jdbc.persistenciaDAO;
 
+import models.Jogo;
 import models.Juiz;
 
 /**
@@ -14,4 +15,6 @@ public interface IJuizDAO extends IDAO<Juiz> {
     
 
     public java.util.List<Juiz> buscaPorNome(String nome);
+    
+    public java.util.List<Juiz> buscaPorJogo(Jogo vo);
 }

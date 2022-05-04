@@ -16,8 +16,9 @@ import persistencia.dao.mysql.MySqlTreinadorDAO;
 import static javax.swing.JOptionPane.showMessageDialog;
 import models.Jogador;
 import persistencia.dao.mysql.MySqlJogadorDAO;
-import static telas.ListaParticipantes.conn;
-import static telas.ListaParticipantes.jogadores;
+import persistencia.dao.mysql.MySqlJogoDAO;
+import static telas.Menu.conn;
+import static telas.Menu.jogadores;
 
 /**
  *
@@ -54,7 +55,7 @@ public class SelecaoTela extends javax.swing.JFrame {
 
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MySqlTreinadorDAO dao = new MySqlTreinadorDAO(ListaParticipantes.conn);
+                MySqlTreinadorDAO dao = new MySqlTreinadorDAO(Menu.conn);
                 Treinador treinador = dao.buscaPorSelecao(selecao);
                 if (treinador != null) {
                     new ParticipanteTela(treinador);
@@ -70,9 +71,18 @@ public class SelecaoTela extends javax.swing.JFrame {
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 
-                 MySqlJogadorDAO dao = new MySqlJogadorDAO(ListaParticipantes.conn);
+                 MySqlJogadorDAO dao = new MySqlJogadorDAO(Menu.conn);
                  selecao.setJogadores(dao.listaTodosPorSelecao(selecao));
                  new ListaEspecifica(selecao);
+            }
+        });
+        
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+                 MySqlJogoDAO dao = new MySqlJogoDAO(Menu.conn);
+                 dao.listaJogosPorSelecao(selecao);
+                 new ListaEspecifica(selecao.getJogos());
             }
         });
 
