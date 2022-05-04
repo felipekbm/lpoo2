@@ -70,6 +70,7 @@ public class JogoTela extends javax.swing.JFrame {
         this.jogo = jogo;
         initComponents();
         this.setVisible(true);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     /**

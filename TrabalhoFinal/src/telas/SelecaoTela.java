@@ -11,6 +11,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import models.Selecao;
+import models.Treinador;
+import persistencia.dao.mysql.MySqlTreinadorDAO;
+import static javax.swing.JOptionPane.showMessageDialog;
+import models.Jogador;
+import persistencia.dao.mysql.MySqlJogadorDAO;
+import static telas.ListaParticipantes.conn;
+import static telas.ListaParticipantes.jogadores;
 
 /**
  *
@@ -44,7 +51,31 @@ public class SelecaoTela extends javax.swing.JFrame {
 
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         jLabel1.setText(selecao.getNome());
-        
+
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MySqlTreinadorDAO dao = new MySqlTreinadorDAO(ListaParticipantes.conn);
+                Treinador treinador = dao.buscaPorSelecao(selecao);
+                if (treinador != null) {
+                    new ParticipanteTela(treinador);
+                } else {
+                    System.out.printf("SEM TREINADOR PO!");
+                    showMessageDialog(null, "A seleção " + selecao.getNome()
+                            + " ainda não possui um treinador cadastrado!");
+
+                }
+
+            }
+        });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+                 MySqlJogadorDAO dao = new MySqlJogadorDAO(ListaParticipantes.conn);
+                 selecao.setJogadores(dao.listaTodosPorSelecao(selecao));
+                 new ListaEspecifica(selecao);
+            }
+        });
+
     }
 
     /**

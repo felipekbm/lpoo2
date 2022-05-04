@@ -24,12 +24,12 @@ import persistencia.dao.mysql.MySqlTreinadorDAO;
  */
 public class ListaParticipantes extends javax.swing.JFrame {
 
-    Connection conn = null;
-    List<Jogador> jogadores = new ArrayList<Jogador>();
-    List<Selecao> selecoes = new ArrayList<Selecao>();
-    List<Jogo> jogos = new ArrayList<Jogo>();
-    List<Juiz> juizes = new ArrayList<Juiz>();
-    List<Treinador> treinadores = new ArrayList<Treinador>();
+   static Connection conn = null;
+    static List<Jogador> jogadores = new ArrayList<Jogador>();
+    static List<Selecao> selecoes = new ArrayList<Selecao>();
+    static List<Jogo> jogos = new ArrayList<Jogo>();
+    static List<Juiz> juizes = new ArrayList<Juiz>();
+    static List<Treinador> treinadores = new ArrayList<Treinador>();
 
     public ListaParticipantes(Connection conn) {
         this.conn = conn;
@@ -169,18 +169,17 @@ public class ListaParticipantes extends javax.swing.JFrame {
                     "Selecao A", "Selecao B", "Resultado", "Local"
                 }
         ));
-          contatoTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        contatoTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 int row = contatoTable1.rowAtPoint(evt.getPoint());
                 int col = contatoTable1.columnAtPoint(evt.getPoint());
                 if (row >= 0) {
-                    
+
                     new JogoTela(jogos.get(row));
                 }
             }
         });
-        
 
     }
 

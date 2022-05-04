@@ -4,6 +4,7 @@
  */
 package jdbc.persistenciaDAO;
 
+import models.Selecao;
 import models.Treinador;
 
 /**
@@ -14,5 +15,7 @@ public interface ITreinadorDAO extends IDAO{
         public boolean atualiza(Treinador vo);
         
         public Treinador buscaSelecao(Treinador vo);
+        
+        public Treinador buscaPorSelecao(Selecao vo);
 
 }

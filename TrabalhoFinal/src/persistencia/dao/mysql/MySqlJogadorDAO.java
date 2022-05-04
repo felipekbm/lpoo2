@@ -133,6 +133,36 @@ public class MySqlJogadorDAO implements IJogadorDAO {
 
         return itens;
     }
+    
+    
+    @Override
+    public List<Jogador> listaTodosPorSelecao(Selecao vo) {
+        List<Jogador> itens = new ArrayList<Jogador>();
+        Jogador item = null;
+        try {
+            PreparedStatement st = conn.prepareStatement(" select participante.id, participante.nome, participante.nacionalidade, participante.data_nasc, participante.foto, jogador.camisa, posicao.id as posicao_id, posicao.nome as posicao \n"
+                    + "from participante inner join jogador on "
+                    + "participante.id = jogador.id inner join posicao on jogador.posicao_id = posicao.id "
+                    + "where jogador.selec_id = ? order by posicao.id;");
+           
+             st.setInt(1, vo.getId());
+            ResultSet rs = (st.executeQuery());
+
+            while (rs != null && rs.next()) {
+                item = new Jogador(rs.getInt("id"), rs.getString("nacionalidade"), rs.getDate("data_nasc"), rs.getString("nome"),
+                        rs.getString("foto"), rs.getInt("camisa")
+                );
+                item.setPosicao(new Posicao(rs.getInt("posicao_id"), rs.getString("posicao")));
+                item.setSelecao(vo);
+                itens.add(item);
+            }
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+
+        return itens;
+    }
 
     public boolean atualizar(Jogador vo) {
         try {

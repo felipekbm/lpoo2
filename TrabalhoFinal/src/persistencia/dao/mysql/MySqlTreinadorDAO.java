@@ -5,6 +5,7 @@
 package persistencia.dao.mysql;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -23,6 +24,31 @@ public class MySqlTreinadorDAO implements ITreinadorDAO {
 
     public MySqlTreinadorDAO(Connection conn) {
         this.conn = conn;
+    }
+
+    @Override
+    public Treinador buscaPorSelecao(Selecao vo) {
+
+        Treinador item = null;
+        try {
+            PreparedStatement st = conn.prepareStatement("select participante.* from treinador "
+                    + "inner join participante on treinador.id = participante.id where treinador.selec_id = ?;");
+            st.setInt(1, vo.getId());
+
+            ResultSet rs = (st.executeQuery());
+
+            if (rs != null && rs.next()) {
+                item = new Treinador(rs.getInt("id"), rs.getString("nacionalidade"),
+                        rs.getDate("data_nasc"), rs.getString("nome"), rs.getString("foto"));
+                item.setSelecao(vo);
+            }
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+
+        return item;
+
     }
 
     @Override
