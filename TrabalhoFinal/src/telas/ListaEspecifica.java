@@ -33,6 +33,7 @@ public class ListaEspecifica extends javax.swing.JFrame {
         setResizable(false);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         jLabel1.setText(this.selecao.getNome());
+        //setLocationRelativeTo(null);
 
     }
 
@@ -159,7 +160,7 @@ public class ListaEspecifica extends javax.swing.JFrame {
         contatoTable.setModel(new javax.swing.table.DefaultTableModel(
                 jogadoresView,
                 new String[]{
-                    "Nome", "Nascimento", "Nacionalidade", "Camisa", "Poição"
+                    "Nome", "Nascimento", "Nacionalidade", "Camisa", "Posição"
                 }
         ));
 
@@ -189,16 +190,17 @@ public class ListaEspecifica extends javax.swing.JFrame {
         jScrollPane1.setViewportView(contatoTable);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("SELECAO");
+        jLabel1.setText("SELEÇÃO");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addGap(180, 180, 180)
+                .addComponent(jLabel1)
+                .addContainerGap(188, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 443, Short.MAX_VALUE))
         );
@@ -209,8 +211,9 @@ public class ListaEspecifica extends javax.swing.JFrame {
                 .addGap(0, 278, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addGap(0, 23, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(23, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(54, 54, 54)))
         );
 
         pack();
