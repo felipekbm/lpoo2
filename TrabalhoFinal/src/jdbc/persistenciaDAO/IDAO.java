@@ -9,9 +9,10 @@ package jdbc.persistenciaDAO;
  * @author User
  */
 public interface IDAO<T> {
-    
-    public  boolean novo(T vo);
 
+    public boolean novo(T vo);
+
+    
 
     public boolean excluir(int id);
 

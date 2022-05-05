@@ -10,7 +10,6 @@ import models.*;
 import java.util.List;
 import persistencia.dao.mysql.MySqlJogadorDAO;
 import static telas.Menu.conn;
-import static telas.Menu.jogadores;
 
 /**
  *

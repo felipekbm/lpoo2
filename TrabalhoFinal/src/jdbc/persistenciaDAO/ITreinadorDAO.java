@@ -11,7 +11,7 @@ import models.Treinador;
  *
  * @author User
  */
-public interface ITreinadorDAO extends IDAO{
+public interface ITreinadorDAO extends IDAO<Treinador>{
         public boolean atualiza(Treinador vo);
         
         public Treinador buscaSelecao(Treinador vo);

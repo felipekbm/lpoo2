@@ -58,6 +58,7 @@ public class MySqlJogadorDAO implements IJogadorDAO {
         try {
             PreparedStatement st = conn.prepareStatement(" insert into jogador(id, selec_id, posicao_id, camisa)"
                     + "values(?, ?, ?, ?);");
+            
             st.setInt(1, vo.getId());
             st.setInt(2, vo.getSelecao().getId());
             st.setInt(3, vo.getPosicao().getId());

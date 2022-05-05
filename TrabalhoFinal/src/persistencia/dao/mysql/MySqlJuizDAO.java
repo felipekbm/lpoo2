@@ -125,7 +125,7 @@ public class MySqlJuizDAO implements IJuizDAO {
 
             ResultSet rs = (st.executeQuery());
 
-            if (rs != null && rs.next()) {
+            while (rs != null && rs.next()) {
                 juiz = new Juiz(rs.getInt("id"), rs.getString("nacionalidade"), rs.getDate("data_nasc"), rs.getString("nome"), rs.getString("foto"));
 
                 juizes.add(juiz);

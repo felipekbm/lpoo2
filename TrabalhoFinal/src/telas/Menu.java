@@ -24,12 +24,12 @@ import persistencia.dao.mysql.MySqlTreinadorDAO;
  */
 public class Menu extends javax.swing.JFrame {
 
-   static Connection conn = null;
-    static List<Jogador> jogadores = new ArrayList<Jogador>();
-    static List<Selecao> selecoes = new ArrayList<Selecao>();
-    static List<Jogo> jogos = new ArrayList<Jogo>();
-    static List<Juiz> juizes = new ArrayList<Juiz>();
-    static List<Treinador> treinadores = new ArrayList<Treinador>();
+    static Connection conn = null;
+    List<Jogador> jogadores = new ArrayList<Jogador>();
+    List<Selecao> selecoes = new ArrayList<Selecao>();
+    List<Jogo> jogos = new ArrayList<Jogo>();
+    List<Juiz> juizes = new ArrayList<Juiz>();
+    List<Treinador> treinadores = new ArrayList<Treinador>();
 
     public Menu(Connection conn) {
         this.conn = conn;
@@ -40,28 +40,16 @@ public class Menu extends javax.swing.JFrame {
         this.tableJogos();
         this.tableJuizes();
         this.tableTreinadores();
-        
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refresh();
+            }
+        });
         //setLocationRelativeTo(null);
 
     }
 
     public void tableJogadores() {
-
-        contatoTable2.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                int row = contatoTable2.rowAtPoint(evt.getPoint());
-                int col = contatoTable2.columnAtPoint(evt.getPoint());
-                if (row >= 0) {
-                    Jogador jogadorFocus = jogadores.get(row);
-                    System.out.println(jogadorFocus.getNome());
-                    MySqlJogadorDAO daoJogador = new MySqlJogadorDAO(conn);
-                    jogadorFocus = daoJogador.buscaSelecao(jogadorFocus);
-                    jogadorFocus = daoJogador.buscaPosicao(jogadorFocus);
-                    new ParticipanteTela(jogadores.get(row));
-                }
-            }
-        });
 
         MySqlJogadorDAO daoJogador = new MySqlJogadorDAO(conn);
 
@@ -81,6 +69,28 @@ public class Menu extends javax.swing.JFrame {
                     "Nome", "Nascimento", "Nacionalidade", "Camisa"
                 }
         ));
+        contatoTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int row = contatoTable2.rowAtPoint(evt.getPoint());
+                int col = contatoTable2.columnAtPoint(evt.getPoint());
+                if (row >= 0) {
+                    Jogador jogadorFocus = jogadores.get(row);
+                    System.out.println(jogadorFocus.getNome());
+                    MySqlJogadorDAO daoJogador = new MySqlJogadorDAO(conn);
+                    jogadorFocus = daoJogador.buscaSelecao(jogadorFocus);
+                    jogadorFocus = daoJogador.buscaPosicao(jogadorFocus);
+                    new ParticipanteTela(jogadores.get(row));
+                }
+            }
+        });
+
+    }
+
+    void refresh() {
+
+        new Menu(Menu.conn);
+        dispose();
     }
 
     public void tableTreinadores() {
@@ -241,6 +251,7 @@ public class Menu extends javax.swing.JFrame {
         contatoTable4 = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         contatoTable3 = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
@@ -344,12 +355,18 @@ public class Menu extends javax.swing.JFrame {
 
         mainTabbedPane.addTab("Treinadores", jScrollPane4);
 
+        jButton1.setText("RELOAD");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(mainTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(162, 162, 162)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -357,7 +374,8 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(mainTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1))
         );
 
         pack();
@@ -378,6 +396,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JTable contatoTable2;
     private javax.swing.JTable contatoTable3;
     private javax.swing.JTable contatoTable4;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

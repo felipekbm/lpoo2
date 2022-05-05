@@ -18,7 +18,6 @@ import models.Jogador;
 import persistencia.dao.mysql.MySqlJogadorDAO;
 import persistencia.dao.mysql.MySqlJogoDAO;
 import static telas.Menu.conn;
-import static telas.Menu.jogadores;
 
 /**
  *

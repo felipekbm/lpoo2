@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jdbc.persistenciaDAO.ISelecaoDAO;
 import models.Jogador;
-import models.Posicao;
+
 import models.Selecao;
 import models.Treinador;
 
@@ -69,11 +69,12 @@ public class MySqlSelecaoDAO implements ISelecaoDAO {
     @Override
     public boolean novo(Selecao vo) {
         try {
-            PreparedStatement st = conn.prepareStatement("Insert into posicao( nome, logo) values(?, ?)");
+            PreparedStatement st = conn.prepareStatement("Insert into selecao( nome, logo) values(?, ?)");
             st.setString(1, vo.getNome());
-            st.setString(1, vo.getLogo());
+            st.setString(2, vo.getLogo());
             st.execute();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return false;
         }
 
@@ -83,7 +84,7 @@ public class MySqlSelecaoDAO implements ISelecaoDAO {
     @Override
     public boolean excluir(int id) {
         try {
-            PreparedStatement st = conn.prepareStatement("DELETE FROM posicao WHERE ID = ?;");
+            PreparedStatement st = conn.prepareStatement("DELETE FROM selecao WHERE ID = ?;");
             st.setInt(1, id);
             st.execute();
 
@@ -143,7 +144,7 @@ public class MySqlSelecaoDAO implements ISelecaoDAO {
         Selecao item = null;
 
         try {
-            PreparedStatement st = conn.prepareStatement("select * FROM posicao WHERE ID = ?;");
+            PreparedStatement st = conn.prepareStatement("select * FROM selecao WHERE ID = ?;");
             st.setInt(1, id);
             ResultSet rs = (st.executeQuery());
 
@@ -166,6 +167,27 @@ public class MySqlSelecaoDAO implements ISelecaoDAO {
             Statement st = conn.createStatement();
 
             ResultSet rs = (st.executeQuery("select * from selecao;"));
+
+            while (rs != null && rs.next()) {
+                item = new Selecao(rs.getInt("id"), rs.getString("nome"), rs.getString("logo"));
+
+                itens.add(item);
+            }
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+
+        return itens;
+    }
+
+    public List<Selecao> listaTodosSemTreinador() {
+        List<Selecao> itens = new ArrayList<Selecao>();
+        Selecao item = null;
+        try {
+            Statement st = conn.createStatement();
+
+            ResultSet rs = (st.executeQuery("select * from selecao left join treinador  on selecao.id = treinador.selec_id where selec_id is null"));
 
             while (rs != null && rs.next()) {
                 item = new Selecao(rs.getInt("id"), rs.getString("nome"), rs.getString("logo"));

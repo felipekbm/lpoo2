@@ -64,9 +64,17 @@ public class MySqlTreinadorDAO implements ITreinadorDAO {
         return vo;
     }
 
-    @Override
-    public boolean novo(Object vo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+  @Override
+    public boolean novo(Treinador vo) {
+        try {
+            PreparedStatement st = conn.prepareStatement("Insert into treinador(id,selec_id) values(?,?)");
+            st.setInt(1, vo.getId());
+            st.setInt(2, vo.getSelecao().getId());
+            st.execute();
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -75,7 +83,7 @@ public class MySqlTreinadorDAO implements ITreinadorDAO {
     }
 
     @Override
-    public Object busca(int id) {
+    public Treinador busca(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -102,5 +110,6 @@ public class MySqlTreinadorDAO implements ITreinadorDAO {
 
         return itens;
     }
+
 
 }

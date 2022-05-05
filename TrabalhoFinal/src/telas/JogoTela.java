@@ -29,11 +29,11 @@ public class JogoTela extends javax.swing.JFrame {
         this.jogo = jogo;
         try {
             URL url1 = new URL(jogo.getSelecao1().getLogo());
-            Image image1 = ImageIO.read(url1).getScaledInstance(100, 100, Image.SCALE_DEFAULT);;
+            Image image1 = ImageIO.read(url1).getScaledInstance(100, 100, 100);;
             JLabel imgLabel1 = new JLabel(new ImageIcon(image1));
 
             URL url2 = new URL(jogo.getSelecao2().getLogo());
-            Image image2 = ImageIO.read(url2).getScaledInstance(100, 100, Image.SCALE_DEFAULT);;
+            Image image2 = ImageIO.read(url2).getScaledInstance(100, 100, 100);;
             JLabel imgLabel2 = new JLabel(new ImageIcon(image2));
 
             imgLabel1.setSize(100, 100);
