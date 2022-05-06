@@ -70,7 +70,7 @@ public class MySqlParticipanteDAO implements IParticipanteDAO {
             st.setDate(3, vo.getData_nasc());
             st.setString(4, vo.getFoto());
             
-            st.setInt(4, vo.getId());
+            st.setInt(5, vo.getId());
             st.execute();
         } catch (Exception e) {
             return false;

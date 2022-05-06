@@ -172,7 +172,7 @@ public class MySqlJogadorDAO implements IJogadorDAO {
             st.setInt(1, vo.getSelecao().getId());
             st.setInt(2, vo.getPosicao().getId());
             st.setInt(3, vo.getCamisa());
-            st.setInt(3, vo.getId());
+            st.setInt(4, vo.getId());
             st.execute();
         } catch (Exception e) {
             return false;
@@ -198,18 +198,16 @@ public class MySqlJogadorDAO implements IJogadorDAO {
 
     @Override
     public Jogador buscaPosicao(Jogador vo) {
-        Jogador item = null;
-        Posicao posicao = null;
+        Jogador jogador = null;
         try {
             MySqlPosicaoDAO DAO = new MySqlPosicaoDAO(conn);
-             DAO.buscaPorJogador(vo);
-            item.setPosicao(posicao);
+            jogador = DAO.buscaPorJogador(vo);
 
         } catch (Exception e) {
             System.out.println(e);
         }
 
-        return item;
+        return jogador;
     }
 
 }

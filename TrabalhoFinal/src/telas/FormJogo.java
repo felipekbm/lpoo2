@@ -105,6 +105,7 @@ public class FormJogo extends javax.swing.JFrame {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MySqlJogoDAO jDao = new MySqlJogoDAO(Menu.conn);
                 //Date data, String resultado, String local
+
                 Jogo novo = new Jogo(0, new Date(2022, 2, 2), jTextField1.getText(), jTextField3.getText());
                 novo.setSelecao1(selecao1);
                 novo.setSelecao2(selecao2);
