@@ -4,7 +4,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
- * @author Karine Antoniacomi
+ * @author Felipe Miyazaki - Karine Antoniacomi - Ricardo Filho
  */
 
 public class CentralCadastros extends javax.swing.JFrame {

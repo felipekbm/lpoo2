@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author https://github.com/felipekbm/lpoo2.git
+ * @author Felipe Miyazaki - Karine Antoniacomi - Ricardo Filho
  */
 
 public class ConexaoDAO {

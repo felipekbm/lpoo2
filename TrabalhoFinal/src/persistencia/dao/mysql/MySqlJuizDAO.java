@@ -13,7 +13,7 @@ import models.Jogo;
 
 /**
  *
- * @author Ricardo Filho - Karine Antoniacomi
+ * @author Felipe Miyazaki - Karine Antoniacomi - Ricardo Filho
  */
 
 public class MySqlJuizDAO implements IJuizDAO {

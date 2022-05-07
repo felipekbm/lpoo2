@@ -16,7 +16,7 @@ import persistencia.dao.mysql.MySqlTreinadorDAO;
 
 /**
  *
- * @author Ricardo Filho - Karine Antoniacomi
+ * @author Felipe Miyazaki - Karine Antoniacomi - Ricardo Filho
  */
 
 public class Menu extends javax.swing.JFrame {

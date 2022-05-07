@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Ricardo Filho
+ * @author Felipe Miyazaki - Karine Antoniacomi - Ricardo Filho
  */
 
 public class MySqlParticipanteDAO implements IParticipanteDAO {

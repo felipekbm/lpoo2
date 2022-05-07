@@ -14,7 +14,7 @@ import models.Selecao;
 
 /**
  *
- * @author Ricardo Filho - Karine Antoniacomi
+ * @author Felipe Miyazaki - Karine Antoniacomi - Ricardo Filho
  */
 
 public class MySqlJogadorDAO implements IJogadorDAO {

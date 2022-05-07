@@ -12,7 +12,7 @@ import persistencia.dao.mysql.MySqlJogoDAO;
 
 /**
  *
- * @author Ricardo Filho - Karine Antoniacomi
+ * @author Felipe Miyazaki - Karine Antoniacomi - Ricardo Filho
  */
 
 public class FormJogo extends javax.swing.JFrame {

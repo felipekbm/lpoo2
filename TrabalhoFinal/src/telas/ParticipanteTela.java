@@ -20,7 +20,7 @@ import persistencia.dao.mysql.MySqlTreinadorDAO;
 
 /**
  *
- * @author Karine Antoniacomi
+ * @author Felipe Miyazaki - Karine Antoniacomi - Ricardo Filho
  */
 public class ParticipanteTela extends javax.swing.JFrame {
 

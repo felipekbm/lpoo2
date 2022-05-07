@@ -9,7 +9,7 @@ import models.Juiz;
 
 /**
  *
- * @author Ricardo Filho - Karine Antoniacomi
+ * @author Felipe Miyazaki - Karine Antoniacomi - Ricardo Filho
  */
 
 public interface IJuizDAO extends IDAO<Juiz> {

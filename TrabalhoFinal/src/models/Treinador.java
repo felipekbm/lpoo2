@@ -4,7 +4,7 @@ import java.sql.Date;
 
 /**
  *
- * @author User
+ * @author Felipe Miyazaki - Karine Antoniacomi - Ricardo Filho
  */
 
 public class Treinador extends Participante {

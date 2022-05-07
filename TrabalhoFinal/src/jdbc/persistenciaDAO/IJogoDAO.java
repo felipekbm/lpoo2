@@ -7,7 +7,7 @@ import models.Selecao;
 
 /**
  *
- * @author Ricardo Filho 
+ * @author Felipe Miyazaki - Karine Antoniacomi - Ricardo Filho
  */
 
 public interface IJogoDAO extends IDAO<Jogo> {

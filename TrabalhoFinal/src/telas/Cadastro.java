@@ -12,7 +12,7 @@ import persistencia.dao.mysql.MySqlTreinadorDAO;
 
 /**
  *
- * @author Ricardo Filho - Karine Antoniacomi
+ * @author Felipe Miyazaki - Karine Antoniacomi - Ricardo Filho
  */
 
 public class Cadastro extends javax.swing.JFrame {

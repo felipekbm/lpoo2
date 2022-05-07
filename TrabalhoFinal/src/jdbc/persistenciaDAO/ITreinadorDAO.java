@@ -5,7 +5,7 @@ import models.Treinador;
 
 /**
  *
- * @author Ricardo Filho - Karine Antoniacomi
+ * @author Felipe Miyazaki - Karine Antoniacomi - Ricardo Filho
  */
 
 public interface ITreinadorDAO extends IDAO<Treinador>{

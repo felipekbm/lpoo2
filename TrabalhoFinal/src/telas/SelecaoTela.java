@@ -18,7 +18,7 @@ import static telas.Menu.conn;
 
 /**
  *
- * @author Ricardo Filho - Karine Antoniacomi
+ * @author Felipe Miyazaki - Karine Antoniacomi - Ricardo Filho
  */
 
 public class SelecaoTela extends javax.swing.JFrame {
