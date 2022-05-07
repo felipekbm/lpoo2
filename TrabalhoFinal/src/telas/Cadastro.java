@@ -23,6 +23,46 @@ public class Cadastro extends javax.swing.JFrame {
     java.text.SimpleDateFormat sdf
             = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+       public Cadastro(Selecao selecao) {
+          initComponents();
+        this.selecaoFocus = selecao;
+        
+        this.setVisible(true);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setResizable(false);
+        System.out.println(selecao.getNome());
+        editarSelecao();
+    }
+       
+        void editarSelecao() {
+        System.out.println(selecaoFocus.getNome());
+        jLabel1.setText("Editar SELEÇÃO");
+        jButton2.setVisible(false);
+        jButton1.setVisible(false);
+        jTextField6.setVisible(false);
+        jTextField5.setVisible(false);
+        jTextField2.setVisible(false);
+jTextField3.setText(selecaoFocus.getNome());
+                jTextField4.setText(selecaoFocus.getLogo());
+
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                
+                MySqlSelecaoDAO DAO = new MySqlSelecaoDAO(Menu.conn);
+               
+                if (DAO.atualizar( new Selecao(selecaoFocus.getId(), 
+                        jTextField3.getText(), jTextField4.getText()))) {
+                    showMessageDialog(null, "Seleção foi atualizada com sucesso, "
+                            + "de refreash na página para visualizar o resultado!");
+                    dispose();
+                } else {
+                    showMessageDialog(null, "Não foi possível atualizar a seleção! ");
+                }
+
+            }
+        });
+    }
+    
     public Cadastro(Integer option) {
         initComponents();
         if (option == 1) {

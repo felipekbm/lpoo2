@@ -240,18 +240,18 @@ public class MySqlJogoDAO implements IJogoDAO {
     }
     
     @Override
-    public Jogo DeletaJuiz(Jogo vo, int j_id) {
+    public boolean deletaJuiz(Jogo vo) {
         try {
-            PreparedStatement st = conn.prepareStatement("DELETE FROM juiz_jogo WHERE ID_juiz = ? and id_jogo = ?;");
-            st.setInt(1, j_id);
-            st.setInt(2, vo.getId());
+            PreparedStatement st = conn.prepareStatement("DELETE FROM juiz_jogo WHERE  id_jogo = ?;");
+            
+            st.setInt(1, vo.getId());
             st.execute();
             
         } catch (Exception e) {
-            
+           return false; 
         }
         
-        return vo;
+        return true;
     }
     
 }

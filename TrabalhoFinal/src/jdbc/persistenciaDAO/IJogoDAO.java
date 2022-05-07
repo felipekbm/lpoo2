@@ -18,7 +18,7 @@ public interface IJogoDAO extends IDAO<Jogo> {
 
     public Jogo InsereJuiz(Jogo vo);
 
-    public Jogo DeletaJuiz(Jogo vo, int j_id);
+    public boolean deletaJuiz(Jogo vo);
 
     public Selecao listaJogosPorSelecao(Selecao vo);
 }

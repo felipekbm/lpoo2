@@ -72,7 +72,14 @@ public class MySqlTreinadorDAO implements ITreinadorDAO {
 
     @Override
     public boolean excluir(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      try {
+            PreparedStatement st = conn.prepareStatement("delete  from treinador where id = ?");
+            st.setInt(1, id);
+            st.execute();
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     @Override

@@ -71,10 +71,10 @@ public class MySqlJogadorDAO implements IJogadorDAO {
     @Override
     public boolean excluir(int id) {
         try {
-            PreparedStatement st = conn.prepareStatement("DELETE FROM selecao WHERE ID = ?;");
+            PreparedStatement st = conn.prepareStatement("DELETE FROM jogador WHERE ID = ?;");
             st.setInt(1, id);
             st.execute();
-
+            
         } catch (Exception e) {
             return false;
         }

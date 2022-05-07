@@ -5,8 +5,10 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import static javax.swing.JOptionPane.showMessageDialog;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import models.Jogo;
+import persistencia.dao.mysql.MySqlJogoDAO;
 import persistencia.dao.mysql.MySqlJuizDAO;
 
 /**
@@ -22,7 +24,7 @@ public class JogoTela extends javax.swing.JFrame {
      * Creates new form Jogo
      */
     public JogoTela(Jogo jogo) {
-
+     
         this.jogo = jogo;
         try {
             URL url1 = new URL(jogo.getSelecao1().getLogo());
@@ -76,6 +78,20 @@ public class JogoTela extends javax.swing.JFrame {
             }
         });
         
+           jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+               MySqlJogoDAO dao = new MySqlJogoDAO(Menu.conn);
+              boolean dJuiz = dao.deletaJuiz(jogo);
+              boolean dJogo = dao.excluir(jogo.getId());
+              
+              if(dJuiz && dJogo){
+                    dispose();
+                } else {
+                    showMessageDialog(null, "Não foi possível excluir o jogo! ");
+                }
+            }
+        });
+        
           jLabel1.setText(jogo.getResultado());
         this.jogo = jogo;
         initComponents();
@@ -100,6 +116,7 @@ public class JogoTela extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -157,6 +174,8 @@ public class JogoTela extends javax.swing.JFrame {
 
         jLabel3.setText("DATA");
 
+        jButton1.setText("DELETAR");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,13 +196,15 @@ public class JogoTela extends javax.swing.JFrame {
                         .addGap(159, 159, 159)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(193, 193, 193)
-                        .addComponent(jButton4))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(140, 140, 140)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(193, 193, 193)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1)
+                            .addComponent(jButton4))))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -207,7 +228,9 @@ public class JogoTela extends javax.swing.JFrame {
                         .addGap(1, 1, 1)
                         .addComponent(jLabel2))
                     .addComponent(jLabel3))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
@@ -227,6 +250,7 @@ public class JogoTela extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

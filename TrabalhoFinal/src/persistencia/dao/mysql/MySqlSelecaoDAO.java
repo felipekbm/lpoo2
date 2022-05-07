@@ -31,8 +31,8 @@ public class MySqlSelecaoDAO implements ISelecaoDAO {
             PreparedStatement st = conn.prepareStatement("update selecao set nome = ?, logo = ? where  id=?");
 
             st.setString(1, vo.getNome());
-            st.setString(1, vo.getLogo());
-            st.setInt(2, vo.getId());
+            st.setString(2, vo.getLogo());
+            st.setInt(3, vo.getId());
             st.execute();
         } catch (Exception e) {
             return false;

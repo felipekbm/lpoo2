@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 import javax.swing.JPanel;
 import models.Juiz;
 import models.Treinador;
@@ -389,7 +390,55 @@ public class ParticipanteTela extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
-        JOptionPane.showMessageDialog(null, "Função em desenvolvimento. Tenha paciência.");
+       if(jogador != null){
+           MySqlJogadorDAO daoJ =  new MySqlJogadorDAO(Menu.conn);
+           MySqlParticipanteDAO daoP =  new MySqlParticipanteDAO(Menu.conn);
+           boolean j = daoJ.excluir(jogador.getId());
+            boolean p = daoP.excluir(jogador.getId());
+            
+            if(j && p){
+                  showMessageDialog(null, "O jogador foi excluido com sucesso dê reload "
+                          + "para visualizar os resultados!");
+                  dispose();
+            }else{
+                showMessageDialog(null, "Não foi possível excluir  o jogador! ");
+            }
+           
+       }
+       
+        if(treinador != null){
+           MySqlTreinadorDAO daoT =  new MySqlTreinadorDAO(Menu.conn);
+           MySqlParticipanteDAO daoP =  new MySqlParticipanteDAO(Menu.conn);
+           boolean j = daoT.excluir(treinador.getId());
+            boolean p = daoP.excluir(treinador.getId());
+            
+            if(j && p){
+                  showMessageDialog(null, "O treinador foi excluido com sucesso dê reload "
+                          + "para visualizar os resultados!");
+                  dispose();
+            }else{
+                showMessageDialog(null, "Não foi possível excluir  o treinador! ");
+            }
+           
+       }
+        
+        
+         if(juiz != null){
+           MySqlJuizDAO daoT =  new MySqlJuizDAO(Menu.conn);
+           MySqlParticipanteDAO daoP =  new MySqlParticipanteDAO(Menu.conn);
+           boolean j = daoT.excluir(juiz.getId());
+            boolean p = daoP.excluir(juiz.getId());
+            
+            if(j && p){
+                  showMessageDialog(null, "O juiz foi excluido com sucesso dê reload "
+                          + "para visualizar os resultados!");
+                  dispose();
+            }else{
+                showMessageDialog(null, "Não foi possível excluir  o juiz!"
+                        + "Cheque se ele não está relacionado em nenhum jogo! ");
+            }
+           
+       }
     }//GEN-LAST:event_btnEditar1ActionPerformed
 
 
