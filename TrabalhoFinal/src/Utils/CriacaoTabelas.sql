@@ -1,6 +1,6 @@
 /**
  *
- * @author Ricardo Filho
+ * @author https://github.com/felipekbm/lpoo2.git
  */
 
 create table participante(id int not null primary key AUTO_INCREMENT, nacionalidade varchar(255) not null, 
