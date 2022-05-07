@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package jdbc.conexao;
 
 import java.sql.Connection;
@@ -10,8 +6,9 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author User
+ * @author Ricardo Filho - Karine Antoniacomi
  */
+
 public class ConexaoDAO {
     public  Connection conectaDB(){
         Connection conn = null;
@@ -24,8 +21,6 @@ public class ConexaoDAO {
             JOptionPane.showMessageDialog(null, "CONEXAO: " + error.getMessage());
         }
         
-        return conn;
-        
+        return conn;   
     }
-    
 }

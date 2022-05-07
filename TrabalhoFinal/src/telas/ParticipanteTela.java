@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package telas;
 
 import javax.swing.ImageIcon;
@@ -19,10 +15,11 @@ import models.Treinador;
 import persistencia.dao.mysql.MySqlJogadorDAO;
 import persistencia.dao.mysql.MySqlJuizDAO;
 import persistencia.dao.mysql.MySqlParticipanteDAO;
+import persistencia.dao.mysql.MySqlTreinadorDAO;
 
 /**
  *
- * @author User
+ * @author Karine Antoniacomi
  */
 public class ParticipanteTela extends javax.swing.JFrame {
 
@@ -109,7 +106,7 @@ public class ParticipanteTela extends javax.swing.JFrame {
 
     void exibeJuiz() {
         tipoParticipante = 1;
-        btnEditar.setVisible(false);
+        btnEditar.setVisible(true);
         
         jTextField1.setText(this.juiz.getNome());
         
@@ -190,6 +187,7 @@ public class ParticipanteTela extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         btnEditar = new javax.swing.JButton();
+        btnEditar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -282,18 +280,29 @@ public class ParticipanteTela extends javax.swing.JFrame {
             }
         });
 
+        btnEditar1.setText("Deletar");
+        btnEditar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(11, 11, 11))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(btnEditar)))
-                .addGap(11, 11, 11)
+                        .addComponent(btnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEditar1)
+                        .addGap(18, 18, 18)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(31, Short.MAX_VALUE))
         );
@@ -305,7 +314,9 @@ public class ParticipanteTela extends javax.swing.JFrame {
                         .addGap(32, 32, 32)
                         .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEditar))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEditar)
+                            .addComponent(btnEditar1)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -321,10 +332,42 @@ public class ParticipanteTela extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
-        // não tem edição para treinador ainda 
-        if(tipoParticipante == 2){
-            JOptionPane.showMessageDialog(null, "Função em desenvolvimento. Tenha paciência.");
+        //Update Juiz 
+        if(tipoParticipante == 1){
+            try{
+                MySqlParticipanteDAO partDAO = new MySqlParticipanteDAO(Menu.conn);
+
+                //atualiza Juiz no BD
+                juiz.setNome(jTextField1.getText());
+                juiz.setNacionalidade(jTextField2.getText());
+                //juiz.setData_nasc(jTextField3.getText());
+                
+                partDAO.atualizar(juiz);
+
+                JOptionPane.showMessageDialog(null, "Juiz [" + juiz.getNome() + "] editado com sucesso.");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Não foi possível editar o juiz [" + juiz.getNome() + "]: " + e.getMessage());
+            }
         }
+        
+        //atualiza Treinador no BD 
+        if(tipoParticipante == 2){
+            try{
+                MySqlParticipanteDAO partDAO = new MySqlParticipanteDAO(Menu.conn);
+
+                treinador.setNome(jTextField1.getText());
+                treinador.setNacionalidade(jTextField2.getText());
+                //treinador.setSelecao(jTextField3.getText());
+                //treinador.setData_nasc(jTextField6.getText()));
+
+                partDAO.atualizar(treinador);
+
+                JOptionPane.showMessageDialog(null, "Treinador [" + treinador.getNome() + "] editado com sucesso.");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Não foi possível editar o treinador [" + treinador.getNome() + "]: " + e.getMessage());
+            }
+        }
+        
         if(tipoParticipante == 3){
             try{
                 MySqlParticipanteDAO partDAO = new MySqlParticipanteDAO(Menu.conn);
@@ -345,9 +388,14 @@ public class ParticipanteTela extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void btnEditar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditar1ActionPerformed
+        JOptionPane.showMessageDialog(null, "Função em desenvolvimento. Tenha paciência.");
+    }//GEN-LAST:event_btnEditar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEditar1;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

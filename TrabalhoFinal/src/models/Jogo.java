@@ -1,15 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package models;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  *
- * @author User
+ * @author Ricardo Filho - Karine Antoniacomi
  */
+
 public class Jogo {
     private int id;
   private Selecao selecao1 ;

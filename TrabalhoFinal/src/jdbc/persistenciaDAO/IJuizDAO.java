@@ -9,10 +9,10 @@ import models.Juiz;
 
 /**
  *
- * @author User
+ * @author Ricardo Filho - Karine Antoniacomi
  */
+
 public interface IJuizDAO extends IDAO<Juiz> {
-    
 
     public java.util.List<Juiz> buscaPorNome(String nome);
     

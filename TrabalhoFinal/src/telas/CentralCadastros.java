@@ -1,16 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package telas;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
- * @author karin
+ * @author Karine Antoniacomi
  */
+
 public class CentralCadastros extends javax.swing.JFrame {
 
     /**

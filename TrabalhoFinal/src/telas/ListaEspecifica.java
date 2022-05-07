@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package telas;
 
 import java.util.ArrayList;
@@ -13,8 +9,9 @@ import static telas.Menu.conn;
 
 /**
  *
- * @author User
+ * @author Ricardo Filho - Karine Antoniacomi
  */
+
 public class ListaEspecifica extends javax.swing.JFrame {
 
     Selecao selecao = null;

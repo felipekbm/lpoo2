@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package telas;
 
 import java.awt.Color;
@@ -17,8 +13,9 @@ import persistencia.dao.mysql.MySqlSelecaoDAO;
 
 /**
  *
- * @author User
+ * @author Ricardo Filho - Karine Antoniacomi
  */
+
 public class HelperList extends javax.swing.JFrame {
 
     Posicao posicaoFocus = null;

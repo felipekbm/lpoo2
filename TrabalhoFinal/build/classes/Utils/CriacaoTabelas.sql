@@ -1,3 +1,8 @@
+/**
+ *
+ * @author Ricardo Filho
+ */
+
 create table participante(id int not null primary key AUTO_INCREMENT, nacionalidade varchar(255) not null, 
 data_nasc date not null, nome varchar(255) not null, foto varchar(255));
 

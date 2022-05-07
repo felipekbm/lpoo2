@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package jdbc.persistenciaDAO;
 
 import models.Jogador;
@@ -10,8 +6,9 @@ import models.Treinador;
 
 /**
  *
- * @author User
+ * @author Ricardo Filho
  */
+
 public interface ISelecaoDAO extends IDAO<Selecao>  {
     public boolean atualizar(Selecao vo);
 

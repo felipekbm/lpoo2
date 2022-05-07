@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package persistencia.dao.mysql;
 
 import java.sql.Connection;
@@ -18,8 +14,9 @@ import models.Selecao;
 
 /**
  *
- * @author User
+ * @author Ricardo Filho - Karine Antoniacomi
  */
+
 public class MySqlJogadorDAO implements IJogadorDAO {
 
     Connection conn = null;

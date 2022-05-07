@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package persistencia.dao.mysql;
 
 import java.sql.Connection;
@@ -11,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import jdbc.persistenciaDAO.ITreinadorDAO;
+import models.Jogador;
 import models.Selecao;
 import models.Treinador;
 
@@ -18,6 +15,7 @@ import models.Treinador;
  *
  * @author User
  */
+
 public class MySqlTreinadorDAO implements ITreinadorDAO {
 
     Connection conn = null;
@@ -49,11 +47,6 @@ public class MySqlTreinadorDAO implements ITreinadorDAO {
 
         return item;
 
-    }
-
-    @Override
-    public boolean atualiza(Treinador vo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override

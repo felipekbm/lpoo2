@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package telas;
 
 import java.sql.Date;
@@ -16,8 +12,9 @@ import persistencia.dao.mysql.MySqlTreinadorDAO;
 
 /**
  *
- * @author User
+ * @author Ricardo Filho - Karine Antoniacomi
  */
+
 public class Cadastro extends javax.swing.JFrame {
 
     Posicao posicaoFocus = null;
